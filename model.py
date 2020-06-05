@@ -23,9 +23,30 @@ class BertNer(tf.keras.Model):
         '''
         super(BertNer, self).__init__()
         
-        input_word_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_word_ids')
-        input_mask = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_mask')
-        input_type_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_type_ids')
+        #input_word_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_word_ids')
+        #input_mask = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_mask')
+        #input_type_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='input_type_ids')
+        
+        
+        input_word_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='module/input_word_ids')
+        input_mask = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='module/input_mask')
+        input_type_ids = tf.keras.layers.Input(shape=(max_seq_length,), dtype=tf.int32, name='module/input_type_ids')
+        
+        #bert_inputs = dict(
+        #            input_ids=tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="module/input_ids"),
+        #            input_mask=tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="module/input_mask"),
+        #            segment_ids=tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="module/segment_ids")
+        #)
+        #tf.compat.v1.disable_eager_execution()
+
+        #input_word_ids =tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="input_ids"),
+        #input_mask =tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="input_mask"),
+        #input_type_ids =tf.compat.v1.placeholder(dtype=tf.compat.v1.int32, shape=(max_seq_length, None), name="segment_ids")
+
+        #albert_inputs = {"input_ids": input_word_ids, "input_mask": input_masks, "segment_ids": input_segments}
+        #bert_inputs = {"input_ids": input_word_ids, "input_mask": input_mask, "segment_ids": input_type_ids}
+        
+        
         
         if type(bert_model) == str:
             bert_config = BertConfig.from_json_file(os.path.join(bert_model,"bert_config.json"))
