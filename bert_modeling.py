@@ -118,6 +118,14 @@ def get_bert_model(input_word_ids,
   bert_model_layer = BertModel(config=config, float_type=float_type, name=name)
   pooled_output, sequence_output = bert_model_layer(input_word_ids, input_mask,
                                                     input_type_ids)
+  print('bertModelo',len(bert_model_layer))
+  print('bertModelo',len(bert_model_layer))
+
+  #for in in range(sequence_output):
+  #  bert_outputs["module/bert/encoder/Reshape_{}:0".format(i+1)] = \
+  #  tf.identity(bert_outputs["module/bert/encoder/Reshape_{}:0".format(i+1)],
+  #              name="module/bert/encoder/Reshape_{}".format(i+1))
+
   bert_model = tf.keras.Model(
       inputs=[input_word_ids, input_mask, input_type_ids],
       outputs=[pooled_output, sequence_output])
