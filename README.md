@@ -1,5 +1,7 @@
 # BERT NER
 
+Check compat with v1.15
+
 Use google BERT to do CoNLL-2003 NER !
 
 Train model using Python and TensorFlow 2.0
