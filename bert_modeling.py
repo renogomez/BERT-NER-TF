@@ -22,7 +22,8 @@ import copy
 import json
 import math
 import six
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
 
 from utils import tf_utils
 

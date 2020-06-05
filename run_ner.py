@@ -11,7 +11,10 @@ import shutil
 import sys
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
+
+
 from fastprogress import master_bar, progress_bar
 from seqeval.metrics import classification_report
 
@@ -355,7 +358,7 @@ def main():
 
         with strategy.scope():
             ner = BertNer(args.bert_model, tf.float32, num_labels, args.max_seq_length)
-            loss_fct = tf.keras.losses.SparseCategoricalCrossentropy(reduction=tf.keras.losses.Reduction.NONE)
+            loss_fct = tf.keras.losses.SparseCategoricalCrossentropy(reduction=tf.losses.Reduction.NONE)
 
     label_map = {i: label for i, label in enumerate(label_list, 1)}
     if args.do_train:
@@ -414,7 +417,7 @@ def main():
 
             per_example_losses = strategy.experimental_run_v2(step_fn,
                                      args=(input_ids, input_mask, segment_ids, valid_ids, label_ids,label_mask))
-            mean_loss = strategy.reduce(tf.distribute.ReduceOp.MEAN, per_example_losses, axis=0)
+            mean_loss = strategy.reduce(tf.compat.v1.distribute.get_loss_reduction(), per_example_losses, axis=0)
             return mean_loss
 
         for epoch in epoch_bar:

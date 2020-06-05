@@ -2,7 +2,8 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
 
 from bert_modeling import BertConfig,BertModel
 from utils import tf_utils

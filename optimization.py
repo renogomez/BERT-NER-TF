@@ -20,8 +20,8 @@ from __future__ import print_function
 
 import re
 
-import tensorflow as tf
-
+import tensorflow.compat.v1 as tf
+#tf.disable_v2_behavior()
 
 class WarmUp(tf.keras.optimizers.schedules.LearningRateSchedule):
   """Applys a warmup schedule on a given learning rate decay schedule."""
